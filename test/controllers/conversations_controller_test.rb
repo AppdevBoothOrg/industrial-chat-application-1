@@ -1,44 +1,50 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class ConversationsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @conversation = conversations(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get conversations_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_conversation_url
     assert_response :success
   end
 
-  test "should create conversation" do
+  test 'should create conversation' do
     assert_difference('Conversation.count') do
-      post conversations_url, params: { conversation: { company_representative_id: @conversation.company_representative_id, customer_id: @conversation.customer_id } }
+      post conversations_url,
+           params: { conversation: { company_representative_id: @conversation.company_representative_id,
+                                     customer_id: @conversation.customer_id } }
     end
 
     assert_redirected_to conversation_url(Conversation.last)
   end
 
-  test "should show conversation" do
+  test 'should show conversation' do
     get conversation_url(@conversation)
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get edit_conversation_url(@conversation)
     assert_response :success
   end
 
-  test "should update conversation" do
-    patch conversation_url(@conversation), params: { conversation: { company_representative_id: @conversation.company_representative_id, customer_id: @conversation.customer_id } }
+  test 'should update conversation' do
+    patch conversation_url(@conversation),
+          params: { conversation: { company_representative_id: @conversation.company_representative_id,
+                                    customer_id: @conversation.customer_id } }
     assert_redirected_to conversation_url(@conversation)
   end
 
-  test "should destroy conversation" do
+  test 'should destroy conversation' do
     assert_difference('Conversation.count', -1) do
       delete conversation_url(@conversation)
     end

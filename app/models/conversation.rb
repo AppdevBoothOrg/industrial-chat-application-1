@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: conversations
@@ -9,7 +11,7 @@
 #  updated_at                :datetime         not null
 #
 class Conversation < ApplicationRecord
-  belongs_to :company_representative, class_name: "User"
-  belongs_to :customer, class_name: "User"
+  belongs_to :company_representative, class_name: 'User'
+  belongs_to :customer, class_name: 'User'
   has_many :comments
 end
