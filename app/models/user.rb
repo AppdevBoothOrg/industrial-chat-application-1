@@ -23,4 +23,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  has_many :comments, foreign_key: :author_id
+  has_many :company_conversations, foreign_key: :company_representative, class_name: "Conversations"
+  has_many :customer_conversations, foreign_key: :customer_id, class_name: "Conversations"
+
 end
