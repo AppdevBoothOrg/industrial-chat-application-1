@@ -9,6 +9,8 @@
 #  customer_id               :bigint           not null
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
+#  comments_count            :integer          default(0)
+#  status                    :string
 #
 require 'test_helper'
 

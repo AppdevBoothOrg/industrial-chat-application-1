@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: ratings
+#
+#  id         :bigint           not null, primary key
+#  grader_id  :bigint           not null
+#  gradee_id  :bigint           not null
+#  grade      :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+one:
+  grader: one
+  gradee: one
+  grade: 1
+
+two:
+  grader: two
+  gradee: two
+  grade: 1
