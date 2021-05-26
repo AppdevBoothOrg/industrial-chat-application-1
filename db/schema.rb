@@ -38,9 +38,10 @@ ActiveRecord::Schema.define(version: 2021_05_24_165452) do
   create_table "ratings", force: :cascade do |t|
     t.bigint "grader_id", null: false
     t.bigint "gradee_id", null: false
-    t.integer "grade"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "grade"
+    t.integer "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition"
     t.index ["gradee_id"], name: "index_ratings_on_gradee_id"
     t.index ["grader_id"], name: "index_ratings_on_grader_id"
   end
