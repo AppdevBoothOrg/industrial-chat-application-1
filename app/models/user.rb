@@ -23,11 +23,16 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
-  has_many :comments, foreign_key: :author_id
-  has_many :company_conversations, foreign_key: :company_representative_id, class_name: "Conversations"
-  has_many :customer_conversations, foreign_key: :customer_id, class_name: "Conversations"
-  has_many :grader_ratings, foreign_key: :grader_id, class_name: "Ratings"
-  has_many :gradee_ratings, foreign_key: :gradee_id, class_name: "Ratings"
 
+  validates :username, uniqueness: true
+  validates :username, length: { in: 3..20 }
+  validates_format_of :username, with: /\A[A-Za-z]*\z/
+
+  validates :email, uniqueness: true
+
+  has_many :comments, foreign_key: :author_id
+  has_many :company_conversations, foreign_key: :company_representative_id, class_name: 'Conversations'
+  has_many :customer_conversations, foreign_key: :customer_id, class_name: 'Conversations'
+  has_many :grader_ratings, foreign_key: :grader_id, class_name: 'Ratings'
+  has_many :gradee_ratings, foreign_key: :gradee_id, class_name: 'Ratings'
 end
