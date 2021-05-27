@@ -39,12 +39,14 @@ task sample_data: :environment do
     users.where({ :customer => false }).each do |customer_representative|
       if rand < 0.3
         complaining_customer_grade_submission = complaining_customer.gradee_ratings.create(
+          gradee: customer_representative,
           grader: complaining_customer,
           grade: rand(5)
         )
 
         customer_representative_grade_submission = customer_representative.gradee_ratings.create(
-          gradee: customer_representative,
+          gradee: complaining_customer,
+          grader: customer_representative,
           grade: rand(5)
         )
 
@@ -58,17 +60,18 @@ task sample_data: :environment do
         
         p conversation.errors.full_messages
 
-      end
+        comments_per_conversation = rand(10)+1
 
-      comments_per_conversation = rand(10)+1
-
-      comments_per_conversation.times do
-        comment = conversation.comments.create(
-          body: Faker::Quote.jack_handey,
-          author: [customer_representative, complaining_customer, complaining_customer].sample
-        )
+        comments_per_conversation.times do
+          comment = conversation.comments.create(
+            body: Faker::Quote.jack_handey,
+            author: [customer_representative, complaining_customer, complaining_customer].sample
+          )
         
         p comment.errors.full_messages
+
+      end
+
       end
 
     end

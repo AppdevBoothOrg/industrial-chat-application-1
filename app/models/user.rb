@@ -37,8 +37,8 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
 
   has_many :comments, foreign_key: :author_id
-  has_many :company_conversations, foreign_key: :company_representative_id, class_name: 'Conversations'
-  has_many :customer_conversations, foreign_key: :customer_id, class_name: 'Conversations'
-  has_many :grader_ratings, foreign_key: :grader_id, class_name: 'Ratings'
-  has_many :gradee_ratings, foreign_key: :gradee_id, class_name: 'Ratings'
+  has_many :company_conversations, foreign_key: :company_representative_id, class_name: 'Conversation'
+  has_many :customer_conversations, foreign_key: :customer_id, class_name: 'Conversation'
+  has_many :grader_ratings, foreign_key: :grader_id, class_name: 'Rating'
+  has_many :gradee_ratings, foreign_key: :gradee_id, class_name: 'Rating'
 end
