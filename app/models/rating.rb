@@ -5,12 +5,22 @@
 # Table name: ratings
 #
 #  id                                                              :bigint           not null, primary key
-#  grader_id                                                       :bigint           not null
-#  gradee_id                                                       :bigint           not null
+#  #<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition :integer
+#  grade                                                           :integer
 #  created_at                                                      :datetime         not null
 #  updated_at                                                      :datetime         not null
-#  grade                                                           :integer
-#  #<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition :integer
+#  gradee_id                                                       :bigint           not null
+#  grader_id                                                       :bigint           not null
+#
+# Indexes
+#
+#  index_ratings_on_gradee_id  (gradee_id)
+#  index_ratings_on_grader_id  (grader_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (gradee_id => users.id)
+#  fk_rails_...  (grader_id => users.id)
 #
 class Rating < ApplicationRecord
   belongs_to :grader, class_name: 'User', counter_cache: true
