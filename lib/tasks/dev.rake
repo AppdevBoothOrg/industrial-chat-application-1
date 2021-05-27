@@ -35,8 +35,8 @@ task sample_data: :environment do
 
   users = User.all
 
-  users.where({ customer: true }).each do |complaining_customer|
-    users.where({ customer: false }).each do |customer_representative|
+  users.where({ :customer => true }).each do |complaining_customer|
+    users.where({ :customer => false }).each do |customer_representative|
       next unless rand < 0.3
 
       complaining_customer_grade_submission = complaining_customer.gradee_ratings.create(
