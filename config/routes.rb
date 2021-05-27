@@ -4,6 +4,7 @@
 #
 
 Rails.application.routes.draw do
+  root "conversations#index"
   resources :conversations
   resources :comments
   devise_for :users
