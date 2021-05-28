@@ -15,10 +15,10 @@ task sample_data: :environment do
     }
   end
 
-  people << { username_generated_from_name: 'Alice' }
-  people << { username_generated_from_name: 'Bob' }
-  people << { username_generated_from_name: 'Carol' }
-  people << { username_generated_from_name: 'Doug' }
+  people << [ username_generated_from_name: 'Alice' ]
+  people << [ username_generated_from_name: 'Bob' ]
+  people << [ username_generated_from_name: 'Carol' ]
+  people << [ username_generated_from_name: 'Doug' ]
 
   people.each do |person|
     username = person.fetch(:username_generated_from_name).downcase
