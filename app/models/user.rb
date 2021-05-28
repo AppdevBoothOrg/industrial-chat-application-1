@@ -6,11 +6,12 @@
 #
 #  id                     :bigint           not null, primary key
 #  comments_count         :integer          default(0)
-#  conversation_count     :integer          default(0)
+#  conversations_count    :integer          default(0)
 #  customer               :boolean          default(TRUE)
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  rating                 :integer          default(5)
+#  ratings_count          :integer
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -37,8 +38,9 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
 
   has_many :comments, foreign_key: :author_id
-  has_many :company_conversations, foreign_key: :company_representative_id, class_name: 'Conversations'
-  has_many :customer_conversations, foreign_key: :customer_id, class_name: 'Conversations'
-  has_many :grader_ratings, foreign_key: :grader_id, class_name: 'Ratings'
-  has_many :gradee_ratings, foreign_key: :gradee_id, class_name: 'Ratings'
+  has_many :conversations
+  has_many :company_conversations, foreign_key: :company_representative_id, class_name: 'Conversation'
+  has_many :customer_conversations, foreign_key: :customer_id, class_name: 'Conversation'
+  has_many :grader_ratings, foreign_key: :grader_id, class_name: 'Rating'
+  has_many :gradee_ratings, foreign_key: :gradee_id, class_name: 'Rating'
 end

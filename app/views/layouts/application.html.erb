@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>VanillaRails</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <title>Industrial Chat</title>
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_pack_tag 'application' %>
+      <%= render "shared/cdn_assets" %>
+
+      <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     
-    <%= yield %>
+    <%= render "shared/navbar" %>
+
+    <% if notice.present? %>
+      <%= render "shared/flash", message: notice, css_class: "success" %>
+    <% end %>
+
+    <% if alert.present? %>
+      <%= render "shared/flash", message: alert, css_class: "danger" %>
+    <% end %>
+
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
