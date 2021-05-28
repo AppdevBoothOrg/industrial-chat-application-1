@@ -1,3 +1,18 @@
 <h1>
   <%= @user.username.upcase %>
 </h1>
+
+<h2> Average rating </h2>
+<% average_rating = 0 %>
+<% counter = 0 %>
+
+<% Rating.all.each do |a_rating| %>
+  <% if a_rating.gradee == @user %>
+    <% average_rating = average_rating + a_rating.grade %>
+    <% counter = counter + 1%>
+  <% end %>
+<% end %>
+
+<% average_rating = 1.0*average_rating / counter %>
+
+<%= average_rating %>

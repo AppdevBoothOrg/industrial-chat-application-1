@@ -9,7 +9,7 @@ task sample_data: :environment do
   Rating.delete_all
   User.delete_all
 
-  people = Array.new(20) do
+  people = Array.new(30) do
     {
       username_generated_from_name: Faker::Name.unique.first_name
     }
@@ -37,7 +37,7 @@ task sample_data: :environment do
 
   users.where({ :customer => true }).each do |complaining_customer|
     users.where({ :customer => false }).each do |customer_representative|
-      next unless rand < 0.3
+      next unless rand < 0.4
 
       complaining_customer_grade_submission = complaining_customer.gradee_ratings.create(
         gradee: customer_representative,
