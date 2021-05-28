@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.3'
 
+gem 'turbolinks'
 gem 'http'
 gem 'nokogiri', '>= 1.10.8'
 gem 'sprockets'
