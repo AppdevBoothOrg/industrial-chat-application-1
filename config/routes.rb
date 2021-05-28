@@ -4,10 +4,14 @@
 #
 
 Rails.application.routes.draw do
+  
   root "conversations#index"
   resources :conversations
   resources :comments
   devise_for :users
+
+  resources :users, only: :show
+
   devise_scope :user do  
    get '/users/sign_out' => 'devise/sessions#destroy'     
   end
