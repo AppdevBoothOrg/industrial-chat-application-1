@@ -15,10 +15,10 @@ task sample_data: :environment do
     }
   end
 
-  people << [ username_generated_from_name: 'Alice' ]
-  people << [ username_generated_from_name: 'Bob' ]
-  people << [ username_generated_from_name: 'Carol' ]
-  people << [ username_generated_from_name: 'Doug' ]
+  people << { username_generated_from_name: 'Alice' }
+  people << { username_generated_from_name: 'Bob' }
+  people << { username_generated_from_name: 'Carol' }
+  people << { username_generated_from_name: 'Doug' }
 
   people.each do |person|
     username = person.fetch(:username_generated_from_name).downcase
@@ -51,12 +51,11 @@ task sample_data: :environment do
         grade: rand(5)
       )
 
-      pick_a_status = %i[open closed urgent].sample
 
       conversation = Conversation.create(
         company_representative: customer_representative,
         customer: complaining_customer,
-        status: pick_a_status
+        status: Conversation.statuses.values.sample
       )
 
       p conversation.errors.full_messages
@@ -79,5 +78,5 @@ task sample_data: :environment do
   p "There are now #{User.count} users, of which #{User.where({ customer: true }).count} are customers and #{User.where({ customer: false }).count} are company representatives"
   p "There are now #{Conversation.count} conversations in total."
   p "There are now #{Comment.count} comments."
-  p "There are now #{Rating.count} ratings, double the about of conversations (i.e. we assume everyone always rates)."
+  p "There are now #{Rating.count} ratings, double the amout of conversations (i.e. we assume everyone always rates)."
 end
