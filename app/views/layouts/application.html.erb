@@ -13,6 +13,13 @@
   </head>
 
   <body>
+    <% if notice.present? %>
+      <%= render "shared/flash", message: notice, css_class: success%>
+    <% end %>
+
+    <% if alert.present? %>
+      <%= render "shared/flash", message: alert, css_class: danger %>
+    <% end %>
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
