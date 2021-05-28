@@ -16,9 +16,9 @@
             Resources
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/conversations">Conversations</a>
-            <a class="dropdown-item" href="/ratings">Ratings</a>
-            <a class="dropdown-item" href="/comments">Comments</a>
+            <%= link_to "Conversations", conversations_path, class: "dropdown-item" %>
+            <%= link_to "Ratings", ratings_path, class: "dropdown-item" %>
+            <%= link_to "Comments", comments_path, class: "dropdown-item" %>
           </div>
         </li>
       </ul>
