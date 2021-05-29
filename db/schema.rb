@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 2021_05_29_000944) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "comments_count", default: 0
     t.string "status"
-    t.integer "user_id"
     t.index ["company_representative_id"], name: "index_conversations_on_company_representative_id"
     t.index ["customer_id"], name: "index_conversations_on_customer_id"
   end
