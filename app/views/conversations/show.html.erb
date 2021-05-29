@@ -1,17 +1,19 @@
+<h1> Conversation <%= @conversation.id %> </h1>
+
 <p>
   <strong>Company representative:</strong>
-  <%= @conversation.company_representative_id %>
+  <%= User.all.find(@conversation.company_representative_id).username.capitalize() %>
 </p>
 
 <p>
   <strong>Customer:</strong>
-  <%= @conversation.customer_id %>
+  <%= User.all.find(@conversation.customer_id).username.capitalize() %>
 </p>
 
   <tr>
     <% @conversation.comments.each do |a_comment| %>
       <li> 
-        <%= " #{a_comment.author.username} : #{a_comment.body} " %>  
+        <%= " #{a_comment.author.username} : #{a_comment.body} #{a_comment.created_at}" %>  
       </li>
     <% end %>
   </tr>
