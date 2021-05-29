@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   #resources :users, only: :show
-  get "/users/:username" => "users#show"
+  get "/:username" => "users#show"
   
   resources :ratings, only: :index
 
