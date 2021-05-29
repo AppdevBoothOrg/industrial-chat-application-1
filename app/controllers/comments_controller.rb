@@ -23,6 +23,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.author = current_user
+    @comment.conversation = Conversation.find_by(id: params[:comment][:conversation_id])
 
     respond_to do |format|
       if @comment.save
@@ -66,6 +67,6 @@ class CommentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def comment_params
-    params.require(:comment).permit(:author_id, :body)
+    params.require(:comment).permit(:author_id, :body, :conversation_id)
   end
 end
