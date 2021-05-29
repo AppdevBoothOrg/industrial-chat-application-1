@@ -4,8 +4,17 @@
 
 <h2> Average rating </h2>
 
-<%= "#{@user.calculate_average_rating.to_s} / 5" %>
+<%= "#{@user.calculate_average_rating.round(2).to_s} / 5" %>
 
 <h2> Conversations </h2>
-# Conversations with a set of links to which we will go to /conversation/:id
+
+<% if current_user.customer == true %>
+  <tr>
+    <% current_user.customer_conversations.each do |a_conversation| %>
+      <li> 
+        <%= link_to "Conversation #{a_conversation.id}: status is", conversation_path(a_conversation.id) %>  
+      </li>
+    <% end %>
+  </tr>
+<% end %>
 
