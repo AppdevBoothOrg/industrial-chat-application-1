@@ -42,13 +42,13 @@ task sample_data: :environment do
       complaining_customer_grade_submission = Rating.create(
         gradee: customer_representative,
         grader: complaining_customer,
-        grade: rand(5)
+        grade: rand(6)
       )
 
       customer_representative_grade_submission = Rating.create(
         gradee: complaining_customer,
         grader: customer_representative,
-        grade: rand(5)
+        grade: rand(6)
       )
 
 

@@ -5,7 +5,7 @@
 <tr>
   <% current_user.gradee_ratings.each do |a_rating| %>
     <li>
-      <%= "Rating of #{a_rating.grade} given to #{a_rating.grader.username.capitalize() } " %>
+      <%= "Rating of #{a_rating.grade}/5 given to #{a_rating.grader.username.capitalize() } " %>
     </li>
   <% end %>
 <tr>
