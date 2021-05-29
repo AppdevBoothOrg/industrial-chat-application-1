@@ -39,13 +39,13 @@ task sample_data: :environment do
     users.where({ :customer => false }).each do |customer_representative|
       next unless rand < 0.4
 
-      complaining_customer_grade_submission = complaining_customer.gradee_ratings.create(
+      complaining_customer_grade_submission = Rating.create(
         gradee: customer_representative,
         grader: complaining_customer,
         grade: rand(5)
       )
 
-      customer_representative_grade_submission = customer_representative.gradee_ratings.create(
+      customer_representative_grade_submission = Rating.create(
         gradee: complaining_customer,
         grader: customer_representative,
         grade: rand(5)
