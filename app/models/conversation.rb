@@ -11,6 +11,7 @@
 #  updated_at                :datetime         not null
 #  company_representative_id :bigint           not null
 #  customer_id               :bigint           not null
+#  user_id                   :integer
 #
 # Indexes
 #
@@ -26,6 +27,7 @@ class Conversation < ApplicationRecord
   belongs_to :company_representative, class_name: 'User', counter_cache: true
   belongs_to :customer, class_name: 'User', counter_cache: true
   has_many :comments
+  belongs_to :user
 
   enum status: { open: "open", closed: "closed", urgent: "urgent" }
 end

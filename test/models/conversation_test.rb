@@ -11,6 +11,7 @@
 #  updated_at                :datetime         not null
 #  company_representative_id :bigint           not null
 #  customer_id               :bigint           not null
+#  user_id                   :integer
 #
 # Indexes
 #
