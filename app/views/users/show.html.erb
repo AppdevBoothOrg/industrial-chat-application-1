@@ -12,7 +12,7 @@
   <tr>
     <% current_user.customer_conversations.each do |a_conversation| %>
       <li> 
-        <%= link_to "Conversation #{a_conversation.id}: status is", conversation_path(a_conversation.id) %>  
+        <%= link_to "Conversation #{a_conversation.id}: status is #{a_conversation.status}", conversation_path(a_conversation.id) %>  
       </li>
     <% end %>
   </tr>
