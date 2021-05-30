@@ -35,22 +35,20 @@
 </div>
 
 
-<%= render "/shared/conversation_navigator" %>
+
 
 
 <% if current_user.customer == true %>
   <tr>
     <% current_user.customer_conversations.each do |a_conversation| %>
-      <li> 
-        <%= link_to "Conversation #{a_conversation.id}: status is #{a_conversation.status}", conversation_path(a_conversation.id) %>  
-      </li>
+      <%= render "/shared/conversation_navigator", conversation: a_conversation %>
     <% end %>
   </tr>
 <% else %>
   <tr>
     <% current_user.company_conversations.each do |a_conversation| %>
       <li> 
-        <%= link_to "Conversation #{a_conversation.id}: status is #{a_conversation.status}", conversation_path(a_conversation.id) %>  
+        <%= render "/shared/conversation_navigator", conversation: a_conversation %> 
       </li>
     <% end %>
   </tr>
