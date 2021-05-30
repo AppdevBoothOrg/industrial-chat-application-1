@@ -5,11 +5,14 @@ class CommentsController < ApplicationController
 
   # GET /comments or /comments.json
   def index
+    redirect_back fallback_location: root_url, alert: "You're not authorized for that."
     @comments = Comment.all
   end
 
   # GET /comments/1 or /comments/1.json
-  def show; end
+  def show
+    redirect_back fallback_location: root_url, alert: "You're not authorized for that."
+  end
 
   # GET /comments/new
   def new
