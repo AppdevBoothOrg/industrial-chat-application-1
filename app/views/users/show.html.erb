@@ -8,19 +8,17 @@
   </div>
 </div>
 
-<% the_number = @user.calculate_average_rating.round(2) %>
-
 <div class="row">
   <div class="col-md-6 offset-md-3">
     <h1 class="display-5">
-      <%= "#{the_number} / 5" %>
+      <%= "#{@the_number} / 5" %>
     </h1>
   </div>
 </div>
 
 <div class="row mb-4">
   <div class="col-md-6 offset-md-3">
-    <%= render "/shared/rate_bar", number: the_number %>
+    <%= render "/shared/rate_bar", number: @the_number %>
   </div>
 </div>
 
@@ -47,9 +45,7 @@
 <% else %>
   <tr>
     <% current_user.company_conversations.each do |a_conversation| %>
-      <li> 
-        <%= render "/shared/conversation_navigator", conversation: a_conversation %> 
-      </li>
+      <%= render "/shared/conversation_navigator", conversation: a_conversation %> 
     <% end %>
   </tr>
 <% end %>

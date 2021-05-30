@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :ensure_current_user_logged_in, only: %i[ show ]
 
   def show
+    @the_number = @user.calculate_average_rating.round(2)
   end
   
   private
