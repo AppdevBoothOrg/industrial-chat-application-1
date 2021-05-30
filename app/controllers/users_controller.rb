@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find_by!(username: params.fetch(:username))
+    @user = current_user
   end
 end
