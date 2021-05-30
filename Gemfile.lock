@@ -372,9 +372,8 @@ GEM
     terminal-table (1.6.0)
     thor (1.1.0)
     tilt (2.0.10)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
+    turbo-rails (0.5.9)
+      rails (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2021.1)
@@ -454,7 +453,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   sprockets
   strip_attributes
-  turbolinks
+  turbo-rails
   tzinfo-data
   validate_url
   web-console (>= 4.1.0)
