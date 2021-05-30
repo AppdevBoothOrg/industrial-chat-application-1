@@ -4,9 +4,13 @@
 
 <h2> Average rating </h2>
 
-<%= "#{@user.calculate_average_rating.round(2).to_s} / 5" %>
+<% the_number =  @user.calculate_average_rating.round(2) %>
+
+<%= render "/shared/rate_bar", number: the_number %>
 
 <h2> Conversations </h2>
+
+<%= render "/shared/conversation_navigator" %>
 
 <% if current_user.customer == true %>
   <tr>
