@@ -20,7 +20,9 @@ class CommentsController < ApplicationController
   end
 
   # GET /comments/1/edit
-  def edit; end
+  def edit
+    redirect_back fallback_location: root_url, alert: "You're not authorized for that."
+  end
 
   # POST /comments or /comments.json
   def create
