@@ -14,9 +14,11 @@ class CommentsController < ApplicationController
     redirect_back fallback_location: root_url, alert: "You're not authorized for that."
   end
 
-  # GET /comments/new
+  # GET /comments/new added @comment.author and @comment.conversation ehre now
   def new
     @comment = Comment.new
+    @conversation = Conversation.find_by(params[:id])
+
   end
 
   # GET /comments/1/edit

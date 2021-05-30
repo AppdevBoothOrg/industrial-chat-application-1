@@ -16,7 +16,7 @@ class ConversationsController < ApplicationController
     end
   end
 
-  # GET /conversations/new
+  # GET /conversations/new some alterations here
   def new
     @conversation = Conversation.new
   end
