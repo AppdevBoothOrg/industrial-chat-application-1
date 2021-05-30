@@ -9,4 +9,4 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
 Rails.start()
-//ActiveStorage.start()
+ActiveStorage.start()

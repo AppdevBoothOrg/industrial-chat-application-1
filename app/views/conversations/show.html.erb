@@ -21,13 +21,7 @@
     <% end %>
   </tr>
 
-
-<%= render "comments/form", comment: Comment.new(conversation_id: @conversation.id) %>
-
-<%= turbo_frame_tag "new_comment", target: "_top" do %>
-  <%= link_to 'New Comment Test', new_comment_path %>
-<% end %>
-
+<%= turbo_frame_tag "new_comment", src: new_comment_path, target: "_top" %>
 
 <%= link_to 'Edit', edit_conversation_path(@conversation) %> |
 <%= link_to 'Back', conversations_path %>
