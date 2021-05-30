@@ -16,9 +16,11 @@
 </p>
 
   <tr>
-    <% @conversation.comments.each do |a_comment| %>
-        <%= render "shared/comment", comment: a_comment %>
-    <% end %>
+    <div id="comments_catch">
+      <% @conversation.comments.each do |a_comment| %>
+          <%= render "shared/comment", comment: a_comment %>
+      <% end %>
+    </div>
   </tr>
 
 <%= turbo_frame_tag "new_comment", src: new_comment_path, target: "_top" %>
