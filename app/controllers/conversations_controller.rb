@@ -5,11 +5,16 @@ class ConversationsController < ApplicationController
 
   # GET /conversations or /conversations.json
   def index
+    redirect_back fallback_location: root_url, alert: "You're not authorized for that."
     @conversations = Conversation.all
   end
 
   # GET /conversations/1 or /conversations/1.json
-  def show; end
+  def show
+    if current_user != @conversation.customer and current_user != @conversation.company_representative
+      redirect_back fallback_location: root_url, alert: "You're not authorized for that."
+    end
+  end
 
   # GET /conversations/new
   def new
@@ -17,7 +22,9 @@ class ConversationsController < ApplicationController
   end
 
   # GET /conversations/1/edit
-  def edit; end
+  def edit
+    redirect_back fallback_location: root_url, alert: "You're not authorized for that."
+  end
 
   # POST /conversations or /conversations.json
   def create

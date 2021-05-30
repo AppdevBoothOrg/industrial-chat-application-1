@@ -5,11 +5,14 @@ class CommentsController < ApplicationController
 
   # GET /comments or /comments.json
   def index
+    redirect_back fallback_location: root_url, alert: "You're not authorized for that."
     @comments = Comment.all
   end
 
   # GET /comments/1 or /comments/1.json
-  def show; end
+  def show
+    redirect_back fallback_location: root_url, alert: "You're not authorized for that."
+  end
 
   # GET /comments/new
   def new
@@ -17,15 +20,19 @@ class CommentsController < ApplicationController
   end
 
   # GET /comments/1/edit
-  def edit; end
+  def edit
+    redirect_back fallback_location: root_url, alert: "You're not authorized for that."
+  end
 
   # POST /comments or /comments.json
   def create
     @comment = Comment.new(comment_params)
+    @comment.author = current_user
+    @comment.conversation = Conversation.find_by(id: params[:comment][:conversation_id])
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to @comment.conversation, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -65,6 +72,6 @@ class CommentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def comment_params
-    params.require(:comment).permit(:author_id, :body)
+    params.require(:comment).permit(:author_id, :body, :conversation_id)
   end
 end

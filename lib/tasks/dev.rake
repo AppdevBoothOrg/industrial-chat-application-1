@@ -39,24 +39,23 @@ task sample_data: :environment do
     users.where({ :customer => false }).each do |customer_representative|
       next unless rand < 0.4
 
-      complaining_customer_grade_submission = complaining_customer.gradee_ratings.create(
+      complaining_customer_grade_submission = Rating.create(
         gradee: customer_representative,
         grader: complaining_customer,
-        grade: rand(5)
+        grade: rand(6)
       )
 
-      customer_representative_grade_submission = customer_representative.gradee_ratings.create(
+      customer_representative_grade_submission = Rating.create(
         gradee: complaining_customer,
         grader: customer_representative,
-        grade: rand(5)
+        grade: rand(6)
       )
 
-      pick_a_status = %i[open closed urgent].sample
 
       conversation = Conversation.create(
         company_representative: customer_representative,
         customer: complaining_customer,
-        status: pick_a_status
+        status: Conversation.statuses.values.sample
       )
 
       p conversation.errors.full_messages
@@ -79,5 +78,5 @@ task sample_data: :environment do
   p "There are now #{User.count} users, of which #{User.where({ customer: true }).count} are customers and #{User.where({ customer: false }).count} are company representatives"
   p "There are now #{Conversation.count} conversations in total."
   p "There are now #{Comment.count} comments."
-  p "There are now #{Rating.count} ratings, double the about of conversations (i.e. we assume everyone always rates)."
+  p "There are now #{Rating.count} ratings, double the amout of conversations (i.e. we assume everyone always rates)."
 end

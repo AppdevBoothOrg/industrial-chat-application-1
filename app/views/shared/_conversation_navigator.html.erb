@@ -1,0 +1,11 @@
+<div class="row mb-1">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"> Conversation # <%= conversation.id %></h5>
+        <p class="card-text"> The status of this conversation is <%= conversation.status %> </p>
+        <a href="<%= conversation_path(conversation.id) %>" class="card-link"> Access conversation details </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,18 +1,52 @@
-<h1>
-  <%= @user.username.upcase %>
-</h1>
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
+    <h1 class="display-4">
+      <%= "#{@user.username.capitalize()}'s rating" %>
+    </h1>
 
-<h2> Average rating </h2>
-<% average_rating = 0 %>
-<% counter = 0 %>
+    <p class="lead text-muted">Average rating over all closed conversations</p>
+  </div>
+</div>
 
-<% Rating.all.each do |a_rating| %>
-  <% if a_rating.gradee == @user %>
-    <% average_rating = average_rating + a_rating.grade %>
-    <% counter = counter + 1%>
-  <% end %>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <h1 class="display-5">
+      <%= "#{@the_number} / 5" %>
+    </h1>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
+    <%= render "/shared/rate_bar", number: @the_number %>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
+    <h1 class="display-4">
+      <%= "#{@user.username.capitalize()}'s conversations" %>
+    </h1>
+
+    <p class="lead text-muted">Urgent, open and closed</p>
+  </div>
+</div>
+
+
+
+
+
+<% if current_user.customer == true %>
+  <tr>
+    <% current_user.customer_conversations.each do |a_conversation| %>
+      <%= render "/shared/conversation_navigator", conversation: a_conversation %>
+    <% end %>
+  </tr>
+<% else %>
+  <tr>
+    <% current_user.company_conversations.each do |a_conversation| %>
+      <%= render "/shared/conversation_navigator", conversation: a_conversation %> 
+    <% end %>
+  </tr>
 <% end %>
 
-<% average_rating = 1.0*average_rating / counter %>
-
-<%= average_rating %>

@@ -27,5 +27,5 @@ class Conversation < ApplicationRecord
   belongs_to :customer, class_name: 'User', counter_cache: true
   has_many :comments
 
-  enum status: %i[open closed urgent]
+  enum status: { open: "open", closed: "closed", urgent: "urgent" }
 end
