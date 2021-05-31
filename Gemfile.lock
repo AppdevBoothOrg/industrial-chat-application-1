@@ -461,6 +461,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets
+  stimulus-rails
   strip_attributes
   tzinfo-data
   validate_url
