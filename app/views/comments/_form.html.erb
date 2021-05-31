@@ -16,10 +16,10 @@
     <%= form.text_area :body, class: "form-control" %>
   </div>
   
-
   <%= form.hidden_field :conversation_id %>
 
   <div class="actions">
-    <%= form.submit class: "btn btn-outline-secondary btn-block" %>
+    <%= form.submit class: "btn btn-outline-secondary btn-block", data: { disable_with: false }%>
   </div>
+
 <% end %>
