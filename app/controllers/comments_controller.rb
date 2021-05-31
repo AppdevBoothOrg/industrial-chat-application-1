@@ -16,8 +16,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/new added @comment.author and @comment.conversation ehre now
   def new
-    @comment = Comment.new
-    @conversation = Conversation.find_by(params[:id])
+    @conversation = Conversation.find_by(id: 1284) #All the issue is driven by this
 
   end
 
