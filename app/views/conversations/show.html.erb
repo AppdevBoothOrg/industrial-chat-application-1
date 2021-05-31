@@ -17,13 +17,13 @@
 
   <tr>
     <div id="comments_catch">
-      <% @conversation.comments.each do |a_comment| %>
+      <% @conversation.comments.order({ :created_at => :asc }).each do |a_comment| %>
           <%= render "shared/comment", comment: a_comment %>
       <% end %>
     </div>
   </tr>
 
-<%= turbo_frame_tag "new_comment", src: new_comment_path, target: "_top" %>
+<%= turbo_frame_tag "new_comment", src: new_comment_path(@conversation), target: "_top" %>
 
 <%= link_to 'Edit', edit_conversation_path(@conversation) %> |
 <%= link_to 'Back', conversations_path %>
