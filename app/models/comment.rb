@@ -22,6 +22,7 @@
 class Comment < ApplicationRecord
   belongs_to :author, class_name: 'User', counter_cache: true
   belongs_to :conversation, counter_cache: true, dependent: :destroy
+  #after_create_commit -> { broadcast_append_to "conversations" }
 
   validates :body, presence: true
 end
