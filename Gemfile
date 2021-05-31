@@ -6,7 +6,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.3'
 
 #
-gem 'foreman'
 gem 'hotwire-rails'
 gem 'stimulus-rails'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
