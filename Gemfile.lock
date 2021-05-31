@@ -158,7 +158,6 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
-    foreman (0.87.2)
     git (1.8.1)
       rchardet (~> 1.8)
     globalid (0.4.2)
@@ -453,7 +452,6 @@ DEPENDENCIES
   dotenv-rails
   draft_generators!
   faker
-  foreman
   graphiti (~> 1.2)
   hotwire-rails
   http
