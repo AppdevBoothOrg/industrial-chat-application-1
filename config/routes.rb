@@ -4,8 +4,7 @@
 #
 
 Rails.application.routes.draw do
-  
-  
+  mount ActionCable.server => '/cable'
   root "users#show"
   resources :conversations
   resources :comments
