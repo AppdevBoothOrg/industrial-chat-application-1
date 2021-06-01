@@ -8,6 +8,7 @@ import "@hotwired/turbo-rails"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+//= require_tree ./channels
 Rails.start()
 ActiveStorage.start()
 
