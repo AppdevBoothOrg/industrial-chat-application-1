@@ -36,7 +36,7 @@
 
 
 
-<% if current_user.customer == true %>
+<% current_user.customer %>
   <tr>
     <% current_user.customer_conversations.each do |a_conversation| %>
       <%= render "/shared/conversation_navigator", conversation: a_conversation %>
