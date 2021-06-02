@@ -28,8 +28,18 @@ class ConversationsController < ApplicationController
 
   # POST /conversations or /conversations.json
   def create
-    the_first_comment = Comment.new(author_id: current_user.id)
     @conversation = Conversation.new(conversation_params)
+    @conversation.save
+    
+    the_first_comment = @conversation.comments.create(
+      body: "Hello, how can I help you today?",
+      author_id: current_user.id
+      )
+  
+    #conversation_params[:conversation][:comment_id] = the_first_comment.id
+    
+    @conversation.open!
+    @conversation.comment_id = the_first_comment.id
 
     respond_to do |format|
       if @conversation.save
@@ -73,6 +83,6 @@ class ConversationsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def conversation_params
-    params.require(:conversation).permit(:company_representative_id, :customer_id)
+    params.require(:conversation).permit(:company_representative_id, :customer_id, :comment_id)
   end
 end
