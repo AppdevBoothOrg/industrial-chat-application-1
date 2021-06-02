@@ -1,7 +1,7 @@
 <div class="row mb-4">
   <div class="col-md-6 offset-md-3">
     <h1 class="display-4">
-      <%= "#{@user.username.capitalize()}'s rating" %>
+      <%= "#{@user.username.capitalize}'s rating" %>
     </h1>
 
     <p class="lead text-muted">Average rating over all closed conversations</p>
@@ -36,7 +36,7 @@
 
 
 
-<% current_user.customer %>
+<% if current_user.customer? %>
   <tr>
     <% current_user.customer_conversations.each do |a_conversation| %>
       <%= render "/shared/conversation_navigator", conversation: a_conversation %>

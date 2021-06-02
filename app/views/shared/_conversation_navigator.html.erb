@@ -4,7 +4,7 @@
       <div class="card-body">
         <h5 class="card-title"> Conversation # <%= conversation.id %></h5>
         <p class="card-text"> The status of this conversation is <%= conversation.status %> </p>
-        <a href="<%= conversation_path(conversation.id) %>" class="card-link"> Access conversation details </a>
+        <%= link_to "Access conversation details", conversation, class: "card-link" %>
       </div>
     </div>
   </div>

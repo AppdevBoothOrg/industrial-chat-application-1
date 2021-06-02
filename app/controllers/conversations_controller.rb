@@ -11,7 +11,7 @@ class ConversationsController < ApplicationController
 
   # GET /conversations/1 or /conversations/1.json
   def show
-    if current_user != @conversation.customer and current_user != @conversation.company_representative
+    if current_user != @conversation.customer && current_user != @conversation.company_representative
       redirect_back fallback_location: root_url, alert: "You're not authorized for that."
     end
   end

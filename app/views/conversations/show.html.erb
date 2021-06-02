@@ -4,12 +4,12 @@
 
 <p>
   <strong>Company representative:</strong>
-  <%= User.all.find(@conversation.company_representative_id).username.capitalize() %>
+  <%= User.find(@conversation.company_representative_id).username.capitalize() %>
 </p>
 
 <p>
   <strong>Customer:</strong>
-  <%= User.all.find(@conversation.customer_id).username.capitalize() %>
+  <%= User.find(@conversation.customer_id).username.capitalize() %>
 </p>
 
 <p>

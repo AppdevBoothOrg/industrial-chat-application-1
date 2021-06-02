@@ -48,7 +48,7 @@ class User < ApplicationRecord
     self.grader_ratings.each do |a_grade|
       sum = sum + a_grade.grade
     end
-    return 1.0 * sum / (0.5*self.ratings_count)
+    1.0 * sum / (0.5*self.ratings_count)
   end
 
 end
