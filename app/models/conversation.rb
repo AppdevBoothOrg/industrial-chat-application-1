@@ -9,6 +9,7 @@
 #  status                    :string
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
+#  comment_id                :integer
 #  company_representative_id :bigint           not null
 #  customer_id               :bigint           not null
 #

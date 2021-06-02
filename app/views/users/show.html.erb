@@ -38,13 +38,13 @@
 
 <% if current_user.customer? %>
   <tr>
-    <% current_user.customer_conversations.each do |a_conversation| %>
+    <% current_user.customer_conversations.order({ :created_at => :asc }).each do |a_conversation| %>
       <%= render "/shared/conversation_navigator", conversation: a_conversation %>
     <% end %>
   </tr>
 <% else %>
   <tr>
-    <% current_user.company_conversations.each do |a_conversation| %>
+    <% current_user.company_conversations.order({ :created_at => :asc }).each do |a_conversation| %>
       <%= render "/shared/conversation_navigator", conversation: a_conversation %> 
     <% end %>
   </tr>
@@ -56,7 +56,8 @@
       <div class="col-md-6 offset-md-3">
         <div class="card">
           <div class="card-body">
-            Hi
+            # of Conversations: <%= @current_user.company_conversations.count %>
+            <%= render '/conversations/form', conversation: Conversation.new(company_representative_id: current_user.id, customer_id: 1373) %>
           </div>
         </div>
       </div>

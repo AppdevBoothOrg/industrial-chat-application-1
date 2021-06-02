@@ -28,6 +28,7 @@ class ConversationsController < ApplicationController
 
   # POST /conversations or /conversations.json
   def create
+    the_first_comment = Comment.new(author_id: current_user.id)
     @conversation = Conversation.new(conversation_params)
 
     respond_to do |format|
