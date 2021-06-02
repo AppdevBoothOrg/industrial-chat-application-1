@@ -1,3 +1,5 @@
+<%= turbo_stream_from @conversation %>
+
 <h1> Conversation <%= @conversation.id %> </h1>
 
 <p>
@@ -16,13 +18,14 @@
 </p>
 
   <tr>
-    <% @conversation.comments.each do |a_comment| %>
-        <%= render "shared/comment", comment: a_comment %>
-    <% end %>
+    <div id="comments_catch">
+      <% @conversation.comments.order({ :created_at => :asc }).each do |a_comment| %>
+          <%= render "shared/comment", comment: a_comment %>
+      <% end %>
+    </div>
   </tr>
 
-
-<%= render "comments/form", comment: Comment.new(conversation_id: @conversation.id) %>
+<%= turbo_frame_tag "new_comment", src: new_comment_path(:a_conversation_id => params[:id]), target: "_top" %>
 
 <%= link_to 'Edit', edit_conversation_path(@conversation) %> |
 <%= link_to 'Back', conversations_path %>

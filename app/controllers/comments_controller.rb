@@ -14,9 +14,11 @@ class CommentsController < ApplicationController
     redirect_back fallback_location: root_url, alert: "You're not authorized for that."
   end
 
-  # GET /comments/new
+  # GET /comments/new added @comment.author and @comment.conversation ehre now
   def new
-    @comment = Comment.new
+    conversation_id = params['a_conversation_id']
+    @conversation = Conversation.find_by(id: conversation_id) #All the issue is driven by this
+
   end
 
   # GET /comments/1/edit
@@ -32,6 +34,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        format.turbo_stream
         format.html { redirect_to @comment.conversation, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
