@@ -51,4 +51,18 @@ class User < ApplicationRecord
     1.0 * sum / (0.5*self.ratings_count)
   end
 
+  def self.weave_username_and_id_into_array
+    array_of_usernames = User.where( { customer: true } ).pluck(:username)
+    array_of_ids = User.where( { customer: true } ).pluck(:id)
+    
+    the_weaved_array = []
+    the_length = array_of_usernames.length
+    
+    the_length.times do |the_index|
+      the_weaved_array.append( [array_of_usernames[the_index] , array_of_ids[the_index] ] )
+    end
+
+    return the_weaved_array
+  end
+
 end
