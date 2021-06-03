@@ -19,8 +19,10 @@
         </div>
       </div> 
     <% else %>
-      <div class="col-md-6 mb-4">
-        <%= render "/conversations/rating_input_form", rating: Rating.new(gradee_id: @conversation.company_representative_id, grader_id: @conversation.customer_id, conversation_id: @conversation.id) %>
+      <div class="col-md-3 mb-4">
+        <% if current_user.customer?  %>
+          <%= render "/conversations/rating_input_form", rating: Rating.new(gradee_id: @conversation.company_representative_id, grader_id: @conversation.customer_id, conversation_id: @conversation.id) %>
+        <% end %>
       </div>
     <% end %>
   </p>
@@ -43,7 +45,9 @@
       </div> 
     <% else %>
       <div class="col-md-3 mb-6">
-        <%= render "/conversations/rating_input_form", rating: Rating.new(gradee_id: @conversation.customer_id, grader_id: @conversation.company_representative_id, conversation_id: @conversation.id) %>
+        <% if !(current_user.customer?)  %>
+          <%= render "/conversations/rating_input_form", rating: Rating.new(gradee_id: @conversation.customer_id, grader_id: @conversation.company_representative_id, conversation_id: @conversation.id) %>
+        <% end %>
       </div>
     <% end %>
   </p>
