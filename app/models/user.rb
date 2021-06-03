@@ -53,6 +53,9 @@ class User < ApplicationRecord
 
   def self.weave_username_and_id_into_array
     array_of_usernames = User.where( { customer: true } ).pluck(:username)
+    array_of_usernames.each_with_index do |the_username, the_index| 
+      array_of_usernames[the_index] = the_username.capitalize
+    end
     array_of_ids = User.where( { customer: true } ).pluck(:id)
     
     the_weaved_array = []
