@@ -54,6 +54,20 @@ class ConversationsController < ApplicationController
 
   # PATCH/PUT /conversations/1 or /conversations/1.json
   def update
+    
+    if params['status'] != nil
+      
+      the_status = params['status']
+      if the_status == 'open'
+        @conversation.open!
+      elsif the_status == 'closed'
+        @conversation.close!
+      else 
+        @conversation.urgent!
+      end
+
+    end
+
     respond_to do |format|
       if @conversation.update(conversation_params)
         format.html { redirect_to @conversation, notice: 'Conversation was successfully updated.' }
@@ -83,6 +97,6 @@ class ConversationsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def conversation_params
-    params.require(:conversation).permit(:company_representative_id, :customer_id, :comment_id)
+    params.require(:conversation).permit(:company_representative_id, :customer_id, :comment_id, :status)
   end
 end
