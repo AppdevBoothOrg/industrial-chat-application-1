@@ -12,8 +12,9 @@ Rails.application.routes.draw do
   devise_scope :user do  
    get '/users/sign_out' => 'devise/sessions#destroy'     
   end
-
-  get "/ratings" => "ratings#index"
+  resources :ratings
+  #get "/ratings" => "ratings#index"
+  #post "/ratings" => "ratings#create", :as => 'ratings'
   #resources :users, only: :show
   get "/:username" => "users#show"
   

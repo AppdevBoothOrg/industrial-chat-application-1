@@ -19,7 +19,7 @@
         </div>
       </div> 
     <% else %>
-      <%= render "/conversations/rating_input_form", rating: @conversation.ratings.create(grader_id: @conversation.customer_id, gradee_id: @conversation.company_representative_id) %>
+      <%= render "/conversations/rating_input_form", rating: Rating.new(gradee_id: @conversation.company_representative_id, grader_id: @conversation.customer_id, conversation_id: @conversation.id) %>
     <% end %>
   </p>
 <% end %>
