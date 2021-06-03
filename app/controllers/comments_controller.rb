@@ -32,6 +32,10 @@ class CommentsController < ApplicationController
     @comment.author = current_user
     @comment.conversation = Conversation.find_by(id: params[:comment][:conversation_id])
 
+    if @comment.body == ""
+      redirect_back fallback_location: root_url, alert: 'Comment was not created: comment body is empty!' and return
+    end
+
     respond_to do |format|
       if @comment.save
         format.turbo_stream
