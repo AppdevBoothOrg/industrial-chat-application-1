@@ -12,6 +12,7 @@
 #  comment_id                :integer
 #  company_representative_id :bigint           not null
 #  customer_id               :bigint           not null
+#  rating_id                 :integer
 #
 # Indexes
 #
