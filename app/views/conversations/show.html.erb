@@ -18,6 +18,8 @@
           <%= render "/shared/rate_bar", number: @conversation.company_representative.gradee_ratings.where( {gradee_id: @conversation.company_representative_id} ).first.grade %>
         </div>
       </div>
+    <% else %>
+      <%= render "/shared/rating_input_form", rating: Rating.new(grader_id: @conversation.customer_id, gradee_id: @conversation.company_representative_id) %>
     <% end %>
   </p>
 <% end %>
