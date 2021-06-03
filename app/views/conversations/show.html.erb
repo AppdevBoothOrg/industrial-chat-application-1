@@ -1,16 +1,47 @@
 <%= turbo_stream_from @conversation %>
 
-<h1> Conversation <%= @conversation.id %> </h1>
+<h1>
+  Conversation <%= @conversation.id %>
+</h1>
 
-<p>
+<p class="mt-4">
   <strong>Company representative:</strong>
   <%= User.find(@conversation.company_representative_id).username.capitalize() %>
 </p>
+
+<% if @conversation.closed? %>
+  <p>
+    <strong> Company Representative Rating:</strong>
+    <% if @conversation.company_representative.gradee_ratings.where( {gradee_id: @conversation.company_representative_id} ).first.grade != nil %>
+      <div class="row mb-6">
+        <div class="col-md-6 mb-4">
+          <%= render "/shared/rate_bar", number: @conversation.company_representative.gradee_ratings.where( {gradee_id: @conversation.company_representative_id} ).first.grade %>
+        </div>
+      </div>
+    <% end %>
+  </p>
+<% end %>
+
 
 <p>
   <strong>Customer:</strong>
   <%= User.find(@conversation.customer_id).username.capitalize() %>
 </p>
+
+<% if @conversation.closed? %>
+  <p>
+    <strong>Customer Rating:</strong>
+    <% if @conversation.customer.gradee_ratings.where( {gradee_id: @conversation.customer_id} ).first.grade != nil %>
+      <div class="row mb-4">
+        <div class="col-md-6  mb-4">
+          <%= render "/shared/rate_bar", number: @conversation.customer.gradee_ratings.where( {gradee_id: @conversation.customer_id} ).first.grade %>
+        </div>
+      </div>
+    <% end %>
+  </p>
+<% end %>
+
+
 
 <p>
   <strong>Status:</strong>
