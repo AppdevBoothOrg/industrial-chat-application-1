@@ -19,7 +19,9 @@
         </div>
       </div> 
     <% else %>
-      <%= render "/conversations/rating_input_form", rating: Rating.new(gradee_id: @conversation.company_representative_id, grader_id: @conversation.customer_id, conversation_id: @conversation.id) %>
+      <div class="col-md-6 mb-4">
+        <%= render "/conversations/rating_input_form", rating: Rating.new(gradee_id: @conversation.company_representative_id, grader_id: @conversation.customer_id, conversation_id: @conversation.id) %>
+      </div>
     <% end %>
   </p>
 <% end %>
@@ -29,6 +31,23 @@
   <strong>Customer:</strong>
   <%= User.find(@conversation.customer_id).username.capitalize() %>
 </p>
+
+<% if @conversation.closed? %>
+  <p>
+    <strong> Customer Rating:</strong>
+    <% if @conversation.ratings.where( {gradee_id: @conversation.customer_id} ).count != 0 %>
+      <div class="row mb-6">
+        <div class="col-md-6 mb-4">
+          <%= render "/shared/rate_bar", number: @conversation.ratings.where( {gradee_id: @conversation.customer_id} ).first.grade %>
+        </div>
+      </div> 
+    <% else %>
+      <div class="col-md-3 mb-6">
+        <%= render "/conversations/rating_input_form", rating: Rating.new(gradee_id: @conversation.customer_id, grader_id: @conversation.company_representative_id, conversation_id: @conversation.id) %>
+      </div>
+    <% end %>
+  </p>
+<% end %>
 
 <p>
   <strong>Status:</strong>
