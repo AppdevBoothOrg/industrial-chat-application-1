@@ -90,6 +90,7 @@ group :development do
   gem 'draft_generators', github: 'firstdraft/draft_generators', branch: 'winter-2020'
   gem 'rails_db'
   gem 'rails-erd'
+  gem 'ruby-graphviz'
   gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rails'

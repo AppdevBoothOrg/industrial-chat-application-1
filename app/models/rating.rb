@@ -26,6 +26,7 @@
 class Rating < ApplicationRecord
   belongs_to :grader, class_name: 'User', counter_cache: true
   belongs_to :gradee, class_name: 'User', counter_cache: true
+  belongs_to :conversation
 
   validates :grade, presence: true
   validates_inclusion_of :grade, in: 0..5

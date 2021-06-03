@@ -12,14 +12,14 @@
 <% if @conversation.closed? %>
   <p>
     <strong> Company Representative Rating:</strong>
-    <% if @conversation.company_representative.gradee_ratings.where( {gradee_id: @conversation.company_representative_id} ).first.grade != nil %>
+    <% if @conversation.ratings.where( {gradee_id: @conversation.company_representative_id} ).count != 0 %>
       <div class="row mb-6">
         <div class="col-md-6 mb-4">
-          <%= render "/shared/rate_bar", number: @conversation.company_representative.gradee_ratings.where( {gradee_id: @conversation.company_representative_id} ).first.grade %>
+          <%= render "/shared/rate_bar", number: @conversation.ratings.where( {gradee_id: @conversation.company_representative_id} ).first.grade %>
         </div>
-      </div>
+      </div> 
     <% else %>
-      <%= render "/shared/rating_input_form", rating: Rating.new(grader_id: @conversation.customer_id, gradee_id: @conversation.company_representative_id) %>
+      <%= render "/conversations/rating_input_form", rating: @conversation.ratings.create(grader_id: @conversation.customer_id, gradee_id: @conversation.company_representative_id) %>
     <% end %>
   </p>
 <% end %>
@@ -29,21 +29,6 @@
   <strong>Customer:</strong>
   <%= User.find(@conversation.customer_id).username.capitalize() %>
 </p>
-
-<% if @conversation.closed? %>
-  <p>
-    <strong>Customer Rating:</strong>
-    <% if @conversation.customer.gradee_ratings.where( {gradee_id: @conversation.customer_id} ).first.grade != nil %>
-      <div class="row mb-4">
-        <div class="col-md-6  mb-4">
-          <%= render "/shared/rate_bar", number: @conversation.customer.gradee_ratings.where( {gradee_id: @conversation.customer_id} ).first.grade %>
-        </div>
-      </div>
-    <% end %>
-  </p>
-<% end %>
-
-
 
 <p>
   <strong>Status:</strong>
