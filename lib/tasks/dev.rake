@@ -39,26 +39,29 @@ task sample_data: :environment do
     users.where({ :customer => false }).each do |customer_representative|
       next unless rand < 0.4
 
-      complaining_customer_grade_submission = Rating.create(
-        gradee: customer_representative,
-        grader: complaining_customer,
-        grade: rand(6)
-      )
-
-      customer_representative_grade_submission = Rating.create(
-        gradee: complaining_customer,
-        grader: customer_representative,
-        grade: rand(6)
-      )
-
-
       conversation = Conversation.create(
         company_representative: customer_representative,
         customer: complaining_customer,
         status: Conversation.statuses.values.sample
       )
 
-      p conversation.errors.full_messages
+      if conversation.closed?
+
+        rating_one = conversation.ratings.create(
+          gradee_id: customer_representative.id,
+          grader_id: complaining_customer.id,
+          grade: rand(6),
+          conversation_id: conversation.id
+        )
+
+        rating_two = conversation.ratings.create(
+          gradee_id: complaining_customer.id,
+          grader_id: customer_representative.id,
+          grade: rand(6),
+          conversation_id: conversation.id
+        )
+      end
+
 
       comments_per_conversation = rand(1..10)
 
