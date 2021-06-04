@@ -9,6 +9,7 @@
 #  grade                                                           :integer
 #  created_at                                                      :datetime         not null
 #  updated_at                                                      :datetime         not null
+#  conversation_id                                                 :integer
 #  gradee_id                                                       :bigint           not null
 #  grader_id                                                       :bigint           not null
 #

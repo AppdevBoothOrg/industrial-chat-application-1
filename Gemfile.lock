@@ -475,6 +475,7 @@ DEPENDENCIES
   rubocop
   rubocop-performance
   rubocop-rails
+  ruby-graphviz
   sass-rails (>= 6)
   selenium-webdriver
   skylight

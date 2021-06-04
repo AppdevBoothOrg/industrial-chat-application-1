@@ -11,13 +11,10 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.hidden_field :company_representative_id %>
-  </div>
 
   <div class="field">
-    <%= form.label :customer_id %>
-    <%= form.select :customer_id, User.weave_username_and_id_into_array %>
+    <%= form.label :status %>
+    <%= form.select :status, ["open", "closed", "urgent"] %>
   </div>
 
   <div class="actions">

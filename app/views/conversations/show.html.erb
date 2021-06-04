@@ -1,20 +1,76 @@
 <%= turbo_stream_from @conversation %>
 
-<h1> Conversation <%= @conversation.id %> </h1>
+<h1>
+  Conversation <%= @conversation.id %>
+</h1>
 
-<p>
+<p class="mt-4">
   <strong>Company representative:</strong>
-  <%= User.all.find(@conversation.company_representative_id).username.capitalize() %>
+  <%= User.find(@conversation.company_representative_id).username.capitalize() %>
 </p>
+
+<% if @conversation.closed? %>
+  <p>
+    <strong> Company Representative Rating:</strong>
+    <% if @conversation.ratings.where( {gradee_id: @conversation.company_representative_id} ).count != 0 %>
+      <div class="row mb-6">
+        <div class="col-md-6 mb-4">
+          <%= render "/shared/rate_bar", number: @conversation.ratings.where( {gradee_id: @conversation.company_representative_id} ).first.grade %>
+        </div>
+      </div> 
+    <% else %>
+      <div class="col-md-3 mb-4">
+        <% if current_user.customer?  %>
+          <%= render "/conversations/rating_input_form", rating: Rating.new(gradee_id: @conversation.company_representative_id, grader_id: @conversation.customer_id, conversation_id: @conversation.id) %>
+        <% end %>
+      </div>
+    <% end %>
+  </p>
+<% end %>
+
 
 <p>
   <strong>Customer:</strong>
-  <%= User.all.find(@conversation.customer_id).username.capitalize() %>
+  <%= User.find(@conversation.customer_id).username.capitalize() %>
 </p>
+
+<% if @conversation.closed? %>
+  <p>
+    <strong> Customer Rating:</strong>
+    <% if @conversation.ratings.where( {gradee_id: @conversation.customer_id} ).count != 0 %>
+      <div class="row mb-6">
+        <div class="col-md-6 mb-4">
+          <%= render "/shared/rate_bar", number: @conversation.ratings.where( {gradee_id: @conversation.customer_id} ).first.grade %>
+        </div>
+      </div> 
+    <% else %>
+      <div class="col-md-3 mb-6">
+        <% if !(current_user.customer?)  %>
+          <%= render "/conversations/rating_input_form", rating: Rating.new(gradee_id: @conversation.customer_id, grader_id: @conversation.company_representative_id, conversation_id: @conversation.id) %>
+        <% end %>
+      </div>
+    <% end %>
+  </p>
+<% end %>
 
 <p>
   <strong>Status:</strong>
   <%= @conversation.status.capitalize %>
+  
+  <% if !(current_user.customer?) %>
+    <tr>
+      <div class="row mb-3">
+        <div class="col-md-3">
+          <div class="card" >
+            <div class="card-body" >
+              <%= render '/conversations/status_change_form', conversation: @conversation %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </tr>
+  <% end %>
+
 </p>
 
   <tr>

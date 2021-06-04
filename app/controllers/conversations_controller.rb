@@ -11,7 +11,7 @@ class ConversationsController < ApplicationController
 
   # GET /conversations/1 or /conversations/1.json
   def show
-    if current_user != @conversation.customer and current_user != @conversation.company_representative
+    if current_user != @conversation.customer && current_user != @conversation.company_representative
       redirect_back fallback_location: root_url, alert: "You're not authorized for that."
     end
   end
@@ -29,6 +29,17 @@ class ConversationsController < ApplicationController
   # POST /conversations or /conversations.json
   def create
     @conversation = Conversation.new(conversation_params)
+    @conversation.save
+    
+    the_first_comment = @conversation.comments.create(
+      body: "Hello, how can I help you today?",
+      author_id: current_user.id
+      )
+  
+    #conversation_params[:conversation][:comment_id] = the_first_comment.id
+    
+    @conversation.open!
+    @conversation.comment_id = the_first_comment.id
 
     respond_to do |format|
       if @conversation.save
@@ -43,6 +54,20 @@ class ConversationsController < ApplicationController
 
   # PATCH/PUT /conversations/1 or /conversations/1.json
   def update
+    
+    if params['status'] != nil
+      
+      the_status = params['status']
+      if the_status == 'open'
+        @conversation.open!
+      elsif the_status == 'closed'
+        @conversation.close!
+      else 
+        @conversation.urgent!
+      end
+
+    end
+
     respond_to do |format|
       if @conversation.update(conversation_params)
         format.html { redirect_to @conversation, notice: 'Conversation was successfully updated.' }
@@ -72,6 +97,6 @@ class ConversationsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def conversation_params
-    params.require(:conversation).permit(:company_representative_id, :customer_id)
+    params.require(:conversation).permit(:company_representative_id, :customer_id, :comment_id, :status)
   end
 end

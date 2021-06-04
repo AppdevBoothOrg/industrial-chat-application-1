@@ -45,10 +45,30 @@ class User < ApplicationRecord
 
   def calculate_average_rating
     sum = 0
-    self.grader_ratings.each do |a_grade|
-      sum = sum + a_grade.grade
+
+    if self.grader_ratings != 0
+      self.grader_ratings.each do |a_grade|
+        sum = sum + a_grade.grade
+      end
     end
-    return 1.0 * sum / (0.5*self.ratings_count)
+    1.0 * sum / (0.5*self.ratings_count)
+  end
+
+  def self.weave_username_and_id_into_array
+    array_of_usernames = User.where( { customer: true } ).pluck(:username)
+    array_of_usernames.each_with_index do |the_username, the_index| 
+      array_of_usernames[the_index] = the_username.capitalize
+    end
+    array_of_ids = User.where( { customer: true } ).pluck(:id)
+    
+    the_weaved_array = []
+    the_length = array_of_usernames.length
+    
+    the_length.times do |the_index|
+      the_weaved_array.append( [array_of_usernames[the_index] , array_of_ids[the_index] ] )
+    end
+
+    return the_weaved_array
   end
 
 end

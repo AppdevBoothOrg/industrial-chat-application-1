@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_29_000944) do
+ActiveRecord::Schema.define(version: 2021_06_03_042617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 2021_05_29_000944) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "comments_count", default: 0
     t.string "status"
+    t.integer "comment_id"
+    t.integer "rating_id"
     t.index ["company_representative_id"], name: "index_conversations_on_company_representative_id"
     t.index ["customer_id"], name: "index_conversations_on_customer_id"
   end
@@ -43,6 +45,7 @@ ActiveRecord::Schema.define(version: 2021_05_29_000944) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "grade"
     t.integer "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition"
+    t.integer "conversation_id"
     t.index ["gradee_id"], name: "index_ratings_on_gradee_id"
     t.index ["grader_id"], name: "index_ratings_on_grader_id"
   end

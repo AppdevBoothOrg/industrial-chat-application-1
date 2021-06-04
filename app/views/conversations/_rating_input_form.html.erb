@@ -1,0 +1,23 @@
+<%= form_with(model: rating) do |form| %>
+
+  <div class="field">
+    <%= form.label :grade %>
+    <%= form.select :grade, [0, 1, 2, 3, 4, 5] %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :gradee_id%>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :grader_id%>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :conversation_id%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-outline-secondary btn-block" %>
+  </div>
+<% end %>
