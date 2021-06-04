@@ -45,8 +45,11 @@ class User < ApplicationRecord
 
   def calculate_average_rating
     sum = 0
-    self.grader_ratings.each do |a_grade|
-      sum = sum + a_grade.grade
+
+    if self.grader_ratings != 0
+      self.grader_ratings.each do |a_grade|
+        sum = sum + a_grade.grade
+      end
     end
     1.0 * sum / (0.5*self.ratings_count)
   end
